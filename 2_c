@@ -1,0 +1,21 @@
+install.packages("devtools")
+devtools::install_github("DougLuke/UserNetR")
+library(devtools)
+library(UserNetR)
+install.packages("network")
+
+library(network)
+library(GGally)
+install.packages("GGally")
+install.packages("sna")
+library(ggplot2)
+library(sna)
+
+data("Bali")
+TerrorData=network(Bali)
+
+Names_Of_Terrorist <- as.factor(get.vertex.attribute(Bali,'vertex.names'))
+ggnet2(TerrorData, label=Names_Of_Terrorist)+labs(title = "Bali terror attack names of terrorist")
+
+terrorist_roles <- as.factor(get.vertex.attribute(Bali,'role'))
+ggnet2(TerrorData,label = terrorist_roles) + labs(title = "Roles of the terrorist in Bali")
