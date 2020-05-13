@@ -1,0 +1,20 @@
+library(tidyverse)
+library(ggplot2)
+install.packages("maps")
+install.packages("WDI")
+install.packages("WDI")
+install.packages("tidygraph")
+library(maps)
+library(WDI)
+install.packages("devtools")
+install_github("DougLuke/UserNetR")
+library(UserNetR)
+devtools::install_github("DougLuke/UserNetR")
+
+dat_map <- map_data("world")
+dim(dat_map)
+head(dat_map)
+merged <- full_join(dat_map,wdi,by="ccode")
+ggplot(merged,aes(x=long,y=lat,group=group,fill=Emit_CO2percap))+geom_polygon()+
+  theme(panel.background = element_blank())+ggtitle("CO2 emmisions")+
+  labs(x="Longitudes",y="Latitudes")
